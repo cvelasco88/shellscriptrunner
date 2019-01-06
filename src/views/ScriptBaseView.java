@@ -2,6 +2,8 @@ package views;
 
 import models.MyCellRenderer;
 import models.ScriptBase;
+import models.ScriptStep;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +11,9 @@ import java.awt.event.ActionEvent;
 
 public class ScriptBaseView extends JPanel {
 
+    private static String COLOR_LIST_INSTRUCTIONS = "#5a5a5a";
 
+    private int currentStep = 0;
     private JPanel rootPanel;
     private JPanel self = this;
 
@@ -21,7 +25,8 @@ public class ScriptBaseView extends JPanel {
         setLayout(new BorderLayout());
 
         // Customize view
-        setBackground(Color.RED);
+        //setOpaque(true);
+        //setBackground(new Color(0,0,0,0));
 
         //this.container = container;
         initialize(smb);
@@ -33,44 +38,90 @@ public class ScriptBaseView extends JPanel {
         this.removeAll();
         // updateUI();
 
-        JLabel label1 = new JLabel("MyLabel 1");
+        if(currentStep < smb.getSteps().size()){
 
-        //Add the ubiquitous "Hello World" label.
-        JLabel label2 = new JLabel("Hello World");
+            boolean lastStep = currentStep == smb.getSteps().size() - 1;
 
+            ScriptStep step = smb.getSteps().get(currentStep);
 
+            // TOP
+            JPanel headerPanel = new JPanel();
+            headerPanel.setOpaque(true);
+            headerPanel.setBackground(new Color(0,0,0,0));
+            headerPanel.setLayout(new BorderLayout());
 
-
-        JButton btnMessage = new JButton();
-        btnMessage.setText("Show message");
-        btnMessage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                JOptionPane.showMessageDialog(self, "Hello World! :)" );
+            if (!StringUtils.isEmpty(step.getTitle())){
+                JLabel labelTitle = new JLabel(step.getTitle());
+                headerPanel.add(labelTitle, BorderLayout.NORTH);
             }
-        });
 
-        ///
+            if (!StringUtils.isEmpty(step.getDescription())){
+                JLabel labelDescription = new JLabel(step.getDescription());
+                headerPanel.add(labelDescription, BorderLayout.SOUTH);
+            }
+            add(headerPanel, BorderLayout.NORTH);
 
-        // Create a JList that displays strings from an array
+            // LIST
 
-        String[] data = {"one", "two", "three", "four"};
-        JList myList = new JList(data);
+            // Create a JList that displays strings from an array
+            String[] data = {"one", "two", "three", "four"};
+            JList instructionList = new JList(data);
 
-        myList.setCellRenderer(new MyCellRenderer());
+            instructionList.setCellRenderer(new MyCellRenderer());
+            instructionList.setOpaque(true);
+            instructionList.setBackground(Color.decode(COLOR_LIST_INSTRUCTIONS));
+            // instructionList.setBackground(new Color(0,0,0,0));
 
-        // JScrollPane scrollPane = new JScrollPane(myList);
+            // JScrollPane scrollPane = new JScrollPane(myList);
 
-        // Or in two steps:
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.getViewport().setView(myList);
+            // Or in two steps:
+            JScrollPane scrollPane = new JScrollPane();
+            scrollPane.getViewport().setView(instructionList);
 
-        add(label1, BorderLayout.NORTH);
-        add(label2, BorderLayout.SOUTH);
-        add(btnMessage, BorderLayout.WEST);
-        add(scrollPane, BorderLayout.CENTER);
+            add(scrollPane, BorderLayout.CENTER);
 
+            // BOTTOM
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.setOpaque(true);
+            bottomPanel.setBackground(new Color(0,0,0,0));
+            bottomPanel.setLayout(new BorderLayout());
+
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new BorderLayout());
+
+            if(currentStep > 0){
+                JButton btnNext = new JButton();
+                btnNext.setText("Prev");
+                btnNext.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        currentStep--;
+                        initialize(smb);
+                    }
+                });
+                buttonPanel.add(btnNext, BorderLayout.WEST);
+            }
+
+            //if(!lastStep) {
+                JButton btnNext = new JButton();
+                btnNext.setText("Next");
+                btnNext.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        currentStep++;
+                        initialize(smb);
+                    }
+                });
+                btnNext.setEnabled(!lastStep); // disable
+                buttonPanel.add(btnNext, BorderLayout.EAST);
+            //}
+
+            // Button
+            bottomPanel.add(buttonPanel, BorderLayout.EAST);
+            add(bottomPanel, BorderLayout.SOUTH);
+        }
+
+        // refresh UI
+        updateUI();
     }
-
 }

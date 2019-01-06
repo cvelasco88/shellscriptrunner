@@ -2,6 +2,7 @@ import models.ScriptBase;
 import models.ScriptCommand;
 import models.ScriptInstruction;
 import models.ScriptStep;
+import org.apache.commons.lang3.StringUtils;
 import views.ScriptBaseView;
 
 import javax.swing.*;
@@ -10,10 +11,15 @@ import java.awt.event.ActionEvent;
 
 public class MainForm extends JFrame {
 
+    private static String COLOR_APP = "#152D41";
+    private static String COLOR_PANEL = "#595959";
+
     private JPanel rootPanel;
 
     public MainForm() {
         super();
+
+        add(rootPanel);
 
         // Set Layout
         setLayout(new BorderLayout());
@@ -23,11 +29,11 @@ public class MainForm extends JFrame {
         JPanel middlePanel = new JPanel();
         JPanel bottomPanel = new JPanel();
 
+        topPanel.setLayout(new BorderLayout());
         middlePanel.setLayout(new BorderLayout());
-
+        bottomPanel.setLayout(new BorderLayout());
 
         ScriptBase smb = createScriptModelBase();
-        ScriptBaseView sbv = new ScriptBaseView(middlePanel, smb);
 
         // Add Swing components to content panel
         Container c = getContentPane();
@@ -36,25 +42,15 @@ public class MainForm extends JFrame {
         c.add(middlePanel, BorderLayout.CENTER);
         c.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Add extra views
-
-        // Top
-        JLabel label1 = new JLabel();
-        label1.setText("Top View");
-        topPanel.add(label1);
-
-        middlePanel.add(sbv);
-
-        // Bottom
-        JLabel label2 = new JLabel();
-        label2.setText("Bottom View");
-        bottomPanel.add(label2);
-
         // Customize views
-        topPanel.setBackground(Color.decode("#152D41"));
-        middlePanel.setBackground(Color.decode("#595959"));
-        middlePanel.setBackground(Color.GREEN);
-        bottomPanel.setBackground(Color.decode("#152D41"));
+        topPanel.setBackground(Color.decode(COLOR_APP));
+        middlePanel.setBackground(Color.decode(COLOR_PANEL));
+        bottomPanel.setBackground(Color.decode(COLOR_APP));
+
+        // Add extra views
+        initializeTopPanel(topPanel, smb);
+        initializeMiddlePanel(middlePanel, smb);
+        initializeBottomPanel(bottomPanel, smb);
 
         // Add behaviour
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -100,6 +96,78 @@ public class MainForm extends JFrame {
         //middlePanel.add(sbv);
     }
 
+    private void initializeTopPanel(JPanel topPanel, ScriptBase smb) {
+
+        /* HEADER */
+        JPanel headerPanel = new JPanel();
+        headerPanel.setOpaque(true);
+        headerPanel.setBackground(new Color(0,0,0,0));
+        headerPanel.setLayout(new BorderLayout());
+
+        if (!StringUtils.isEmpty(smb.getTitle())){
+            JLabel labelTitle = new JLabel(smb.getTitle());
+            headerPanel.add(labelTitle, BorderLayout.NORTH);
+        }
+
+        if (!StringUtils.isEmpty(smb.getDescription())){
+            JLabel labelDescription = new JLabel(smb.getDescription());
+            headerPanel.add(labelDescription, BorderLayout.SOUTH);
+        }
+        topPanel.add(headerPanel, BorderLayout.WEST);
+
+        /* CONTENT */
+        topPanel.add(new JLabel(), BorderLayout.CENTER);
+
+        /* BUTTONS */
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setOpaque(true);
+        buttonsPanel.setBackground(new Color(0,0,0,0));
+        buttonsPanel.setLayout(new BorderLayout());
+
+        // Select File
+        JButton btnSelect = new JButton();
+        btnSelect.setText("Select File");
+        btnSelect.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                // TODO: falta implementar
+            }
+        });
+        buttonsPanel.add(btnSelect, BorderLayout.WEST);
+
+        // Run
+        JButton btnMessage = new JButton();
+        btnMessage.setText("Run");
+        btnMessage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                JOptionPane.showMessageDialog(buttonsPanel, "Hello World! :)" );
+            }
+        });
+        buttonsPanel.add(btnMessage, BorderLayout.EAST);
+
+        // Add buttons
+        topPanel.add(buttonsPanel, BorderLayout.EAST);
+    }
+
+    private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
+        ScriptBaseView sbv = new ScriptBaseView(middlePanel, smb);
+        middlePanel.add(sbv);
+    }
+
+    private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
+        // Bottom
+        JLabel labelBottom = new JLabel();
+        labelBottom.setText("Steps number: " + smb.getSteps().size());
+        bottomPanel.add(labelBottom);
+    }
+
+    /**
+     * TODO: remove me
+     * @return
+     */
     private ScriptBase createScriptModelBase() {
         ScriptBase smb = new ScriptBase();
 
