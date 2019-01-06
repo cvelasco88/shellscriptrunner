@@ -1,7 +1,6 @@
-import models.ScriptBase;
-import models.ScriptCommand;
-import models.ScriptInstruction;
-import models.ScriptStep;
+import helpers.ContextColors;
+import helpers.ContextCompat;
+import models.*;
 import org.apache.commons.lang3.StringUtils;
 import views.ScriptBaseView;
 
@@ -10,9 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class MainForm extends JFrame {
-
-    private static String COLOR_APP = "#152D41";
-    private static String COLOR_PANEL = "#595959";
 
     private JPanel rootPanel;
 
@@ -43,9 +39,9 @@ public class MainForm extends JFrame {
         c.add(bottomPanel, BorderLayout.SOUTH);
 
         // Customize views
-        topPanel.setBackground(Color.decode(COLOR_APP));
-        middlePanel.setBackground(Color.decode(COLOR_PANEL));
-        bottomPanel.setBackground(Color.decode(COLOR_APP));
+        topPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
+        ContextCompat.decorateComponent(middlePanel);
+        bottomPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
 
         // Add extra views
         initializeTopPanel(topPanel, smb);
@@ -154,7 +150,9 @@ public class MainForm extends JFrame {
 
     private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
         ScriptBaseView sbv = new ScriptBaseView(middlePanel, smb);
-        middlePanel.add(sbv);
+
+        //middlePanel.add(new JLabel("AAAAA"), BorderLayout.NORTH);
+        middlePanel.add(sbv, BorderLayout.CENTER);
     }
 
     private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {

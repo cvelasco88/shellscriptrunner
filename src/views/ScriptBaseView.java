@@ -1,5 +1,6 @@
 package views;
 
+import helpers.ContextCompat;
 import models.MyCellRenderer;
 import models.ScriptBase;
 import models.ScriptStep;
@@ -11,24 +12,24 @@ import java.awt.event.ActionEvent;
 
 public class ScriptBaseView extends JPanel {
 
-    private static String COLOR_LIST_INSTRUCTIONS = "#5a5a5a";
 
     private int currentStep = 0;
-    private JPanel rootPanel;
+    private JPanel parentPanel;
     private JPanel self = this;
 
     // ctor
-    public ScriptBaseView(JPanel rootPanel, ScriptBase smb) {
+    public ScriptBaseView(JPanel parentPanel, ScriptBase smb) {
 
-        this.rootPanel = rootPanel;
+        this.parentPanel = parentPanel;
 
         setLayout(new BorderLayout());
 
         // Customize view
-        //setOpaque(true);
-        //setBackground(new Color(0,0,0,0));
+        setOpaque(true);
+        // setBackground(new Color(0,0,0,0));
+        setBackground(parentPanel.getBackground());
 
-        //this.container = container;
+        // initialize
         initialize(smb);
     }
 
@@ -52,11 +53,13 @@ public class ScriptBaseView extends JPanel {
 
             if (!StringUtils.isEmpty(step.getTitle())){
                 JLabel labelTitle = new JLabel(step.getTitle());
+                ContextCompat.decorateComponent(labelTitle);
                 headerPanel.add(labelTitle, BorderLayout.NORTH);
             }
 
             if (!StringUtils.isEmpty(step.getDescription())){
                 JLabel labelDescription = new JLabel(step.getDescription());
+                ContextCompat.decorateComponent(labelDescription);
                 headerPanel.add(labelDescription, BorderLayout.SOUTH);
             }
             add(headerPanel, BorderLayout.NORTH);
@@ -69,7 +72,7 @@ public class ScriptBaseView extends JPanel {
 
             instructionList.setCellRenderer(new MyCellRenderer());
             instructionList.setOpaque(true);
-            instructionList.setBackground(Color.decode(COLOR_LIST_INSTRUCTIONS));
+            ContextCompat.decorateComponent(instructionList);
             // instructionList.setBackground(new Color(0,0,0,0));
 
             // JScrollPane scrollPane = new JScrollPane(myList);
