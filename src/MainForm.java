@@ -1,12 +1,11 @@
-import helpers.ContextColors;
-import helpers.ContextCompat;
-import models.*;
-import org.apache.commons.lang3.StringUtils;
+import models.ScriptBase;
+import models.ScriptCommand;
+import models.ScriptInstruction;
+import models.ScriptStep;
 import views.ScriptBaseView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class MainForm extends JFrame {
 
@@ -31,6 +30,7 @@ public class MainForm extends JFrame {
 
         ScriptBase smb = createScriptModelBase();
 
+
         // Add Swing components to content panel
         Container c = getContentPane();
 
@@ -39,9 +39,9 @@ public class MainForm extends JFrame {
         c.add(bottomPanel, BorderLayout.SOUTH);
 
         // Customize views
-        topPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
-        ContextCompat.decorateComponent(middlePanel);
-        bottomPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
+        //topPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
+        //ContextCompat.decorateComponent(middlePanel);
+        //bottomPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
 
         // Add extra views
         initializeTopPanel(topPanel, smb);
@@ -51,6 +51,34 @@ public class MainForm extends JFrame {
         // Add behaviour
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(500, 500));
+    }
+
+    private void initializeTopPanel(JPanel topPanel, ScriptBase smb) {
+
+        /* HEADER */
+        JPanel headerPanel = new JPanel();
+        headerPanel.setOpaque(true);
+        headerPanel.setBackground(new Color(0,0,0,0));
+        headerPanel.setLayout(new BorderLayout());
+
+
+        // Add View
+        topPanel.add(headerPanel, BorderLayout.NORTH);
+    }
+
+    private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
+        ScriptBaseView sbv = new ScriptBaseView(middlePanel, smb);
+
+        // Add View
+        middlePanel.add(sbv, BorderLayout.CENTER);
+    }
+
+    private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
+        // TextArea
+        JLabel labelBottom = new JLabel();
+        labelBottom.setText("Steps number: " + smb.getSteps().size());
+
+        ///
 
         /*JTextArea chatArea = new JTextArea(8, 40);
         chatArea.setEditable(false);
@@ -82,7 +110,7 @@ public class MainForm extends JFrame {
 
         ScriptBase smb = createScriptModelBase();
 
-        ScriptBaseView sbv = new ScriptBaseView(smb);
+        ScriptBaseListView sbv = new ScriptBaseListView(smb);
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         /*mainPanel.add(chatPanel);
@@ -90,75 +118,10 @@ public class MainForm extends JFrame {
         mainPanel.add(youLabelPanel);
         mainPanel.add(inputPanel);*/
         //middlePanel.add(sbv);
-    }
 
-    private void initializeTopPanel(JPanel topPanel, ScriptBase smb) {
+        ///
 
-        /* HEADER */
-        JPanel headerPanel = new JPanel();
-        headerPanel.setOpaque(true);
-        headerPanel.setBackground(new Color(0,0,0,0));
-        headerPanel.setLayout(new BorderLayout());
-
-        if (!StringUtils.isEmpty(smb.getTitle())){
-            JLabel labelTitle = new JLabel(smb.getTitle());
-            headerPanel.add(labelTitle, BorderLayout.NORTH);
-        }
-
-        if (!StringUtils.isEmpty(smb.getDescription())){
-            JLabel labelDescription = new JLabel(smb.getDescription());
-            headerPanel.add(labelDescription, BorderLayout.SOUTH);
-        }
-        topPanel.add(headerPanel, BorderLayout.WEST);
-
-        /* CONTENT */
-        topPanel.add(new JLabel(), BorderLayout.CENTER);
-
-        /* BUTTONS */
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setOpaque(true);
-        buttonsPanel.setBackground(new Color(0,0,0,0));
-        buttonsPanel.setLayout(new BorderLayout());
-
-        // Select File
-        JButton btnSelect = new JButton();
-        btnSelect.setText("Select File");
-        btnSelect.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                // TODO: falta implementar
-            }
-        });
-        buttonsPanel.add(btnSelect, BorderLayout.WEST);
-
-        // Run
-        JButton btnMessage = new JButton();
-        btnMessage.setText("Run");
-        btnMessage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                JOptionPane.showMessageDialog(buttonsPanel, "Hello World! :)" );
-            }
-        });
-        buttonsPanel.add(btnMessage, BorderLayout.EAST);
-
-        // Add buttons
-        topPanel.add(buttonsPanel, BorderLayout.EAST);
-    }
-
-    private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
-        ScriptBaseView sbv = new ScriptBaseView(middlePanel, smb);
-
-        //middlePanel.add(new JLabel("AAAAA"), BorderLayout.NORTH);
-        middlePanel.add(sbv, BorderLayout.CENTER);
-    }
-
-    private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
-        // Bottom
-        JLabel labelBottom = new JLabel();
-        labelBottom.setText("Steps number: " + smb.getSteps().size());
+        // Add View
         bottomPanel.add(labelBottom);
     }
 

@@ -1,5 +1,6 @@
 package views;
 
+import helpers.ContextColors;
 import helpers.ContextCompat;
 import models.MyCellRenderer;
 import models.ScriptBase;
@@ -13,118 +14,72 @@ import java.awt.event.ActionEvent;
 public class ScriptBaseView extends JPanel {
 
 
-    private int currentStep = 0;
-    private JPanel parentPanel;
-    private JPanel self = this;
 
     // ctor
-    public ScriptBaseView(JPanel parentPanel, ScriptBase smb) {
-
-        this.parentPanel = parentPanel;
+    public ScriptBaseView(Component parentView, ScriptBase smb) {
 
         setLayout(new BorderLayout());
 
         // Customize view
         setOpaque(true);
         // setBackground(new Color(0,0,0,0));
-        setBackground(parentPanel.getBackground());
+        setBackground(parentView.getBackground());
 
-        // initialize
-        initialize(smb);
+        // Create Swing components
+        JPanel topPanel = new JPanel();
+        JPanel middlePanel = new JPanel();
+        JPanel bottomPanel = new JPanel();
+
+        topPanel.setLayout(new BorderLayout());
+        middlePanel.setLayout(new BorderLayout());
+        bottomPanel.setLayout(new BorderLayout());
+
+        // Add Swing components to content panel
+
+        add(topPanel, BorderLayout.NORTH);
+        add(middlePanel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        // Customize views
+        topPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
+        ContextCompat.decorateComponent(middlePanel);
+        bottomPanel.setBackground(Color.decode(ContextColors.COLOR_APP));
+
+        // Add extra views
+        initializeTopPanel(topPanel, smb);
+        initializeMiddlePanel(middlePanel, smb);
+        initializeBottomPanel(bottomPanel, smb);
+
+        // Add behaviour
     }
 
-    public void initialize(ScriptBase smb){
+    private void initializeTopPanel(JPanel topPanel, ScriptBase smb) {
 
-        // clear views
-        this.removeAll();
-        // updateUI();
+        /* HEADER */
+        JPanel headerPanel = new JPanel();
+        headerPanel.setOpaque(true);
+        headerPanel.setBackground(new Color(0,0,0,0));
+        headerPanel.setLayout(new BorderLayout());
 
-        if(currentStep < smb.getSteps().size()){
+        // TOOLBAR
 
-            boolean lastStep = currentStep == smb.getSteps().size() - 1;
+        // Add View
+        topPanel.add(headerPanel, BorderLayout.NORTH);
+    }
 
-            ScriptStep step = smb.getSteps().get(currentStep);
+    private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
+        ScriptBaseListView sbv = new ScriptBaseListView(middlePanel, smb);
 
-            // TOP
-            JPanel headerPanel = new JPanel();
-            headerPanel.setOpaque(true);
-            headerPanel.setBackground(new Color(0,0,0,0));
-            headerPanel.setLayout(new BorderLayout());
+        // Add View
+        middlePanel.add(sbv, BorderLayout.CENTER);
+    }
 
-            if (!StringUtils.isEmpty(step.getTitle())){
-                JLabel labelTitle = new JLabel(step.getTitle());
-                ContextCompat.decorateComponent(labelTitle);
-                headerPanel.add(labelTitle, BorderLayout.NORTH);
-            }
+    private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
+        // Bottom
+        JLabel labelBottom = new JLabel();
+        labelBottom.setText("Steps number: " + smb.getSteps().size());
 
-            if (!StringUtils.isEmpty(step.getDescription())){
-                JLabel labelDescription = new JLabel(step.getDescription());
-                ContextCompat.decorateComponent(labelDescription);
-                headerPanel.add(labelDescription, BorderLayout.SOUTH);
-            }
-            add(headerPanel, BorderLayout.NORTH);
-
-            // LIST
-
-            // Create a JList that displays strings from an array
-            String[] data = {"one", "two", "three", "four"};
-            JList instructionList = new JList(data);
-
-            instructionList.setCellRenderer(new MyCellRenderer());
-            instructionList.setOpaque(true);
-            ContextCompat.decorateComponent(instructionList);
-            // instructionList.setBackground(new Color(0,0,0,0));
-
-            // JScrollPane scrollPane = new JScrollPane(myList);
-
-            // Or in two steps:
-            JScrollPane scrollPane = new JScrollPane();
-            scrollPane.getViewport().setView(instructionList);
-
-            add(scrollPane, BorderLayout.CENTER);
-
-            // BOTTOM
-            JPanel bottomPanel = new JPanel();
-            bottomPanel.setOpaque(true);
-            bottomPanel.setBackground(new Color(0,0,0,0));
-            bottomPanel.setLayout(new BorderLayout());
-
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new BorderLayout());
-
-            if(currentStep > 0){
-                JButton btnNext = new JButton();
-                btnNext.setText("Prev");
-                btnNext.addActionListener(new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        currentStep--;
-                        initialize(smb);
-                    }
-                });
-                buttonPanel.add(btnNext, BorderLayout.WEST);
-            }
-
-            //if(!lastStep) {
-                JButton btnNext = new JButton();
-                btnNext.setText("Next");
-                btnNext.addActionListener(new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        currentStep++;
-                        initialize(smb);
-                    }
-                });
-                btnNext.setEnabled(!lastStep); // disable
-                buttonPanel.add(btnNext, BorderLayout.EAST);
-            //}
-
-            // Button
-            bottomPanel.add(buttonPanel, BorderLayout.EAST);
-            add(bottomPanel, BorderLayout.SOUTH);
-        }
-
-        // refresh UI
-        updateUI();
+        // Add View
+        bottomPanel.add(labelBottom);
     }
 }
