@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beee9b8c-9b93-4774-a659-13413a257db1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/ScriptBaseListView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/MainForm$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/MainForm$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/MainForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/shellscriptrunner/MainForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/views/ScriptBaseView$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/views/ScriptBaseView$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/shellscriptrunner/views/ScriptBaseView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/shellscriptrunner/views/ScriptBaseView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ScriptBaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ScriptBaseView.java" afterDir="false" />
@@ -43,12 +37,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-684">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="288">
+              <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#createScriptModelBase#0;class#MainForm#0" />
               </folding>
             </state>
@@ -59,9 +54,10 @@
         <entry file="file://$PROJECT_DIR$/src/views/ScriptBaseListView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="29" column="51" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="29" selection-end-column="51" />
+              <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#initialize#0;class#ScriptBaseView#0" />
               </folding>
             </state>
           </provider>
@@ -110,11 +106,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/ScriptBaseView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="324">
+              <caret line="120" column="62" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
+              <folding>
+                <element signature="e#2930#3110#0" expanded="true" />
+                <element signature="e#3109#3110#0" expanded="true" />
+                <element signature="e#3302#3519#0" expanded="true" />
+                <element signature="e#3518#3519#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -177,8 +179,8 @@
         <option value="$PROJECT_DIR$/src/helpers/ContextTheme.java" />
         <option value="$PROJECT_DIR$/src/helpers/Configurador.java" />
         <option value="$PROJECT_DIR$/src/helpers/ContextCompat.java" />
-        <option value="$PROJECT_DIR$/src/MainForm.java" />
         <option value="$PROJECT_DIR$/src/views/ScriptBaseView.java" />
+        <option value="$PROJECT_DIR$/src/MainForm.java" />
       </list>
     </option>
   </component>
@@ -223,6 +225,12 @@
               <item name="shellscriptrunner" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shellscriptrunner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shellscriptrunner" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="MainForm" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
@@ -303,7 +311,7 @@
     <frame x="67" y="37" width="1853" height="1043" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26157278" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26157278" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -312,7 +320,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295711" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3295711" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3295711" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -492,12 +500,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainForm.java">
+    <entry file="file://$PROJECT_DIR$/src/views/ScriptBaseView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-684">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="324">
+          <caret line="120" column="62" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
           <folding>
-            <element signature="method#createScriptModelBase#0;class#MainForm#0" />
+            <element signature="e#2930#3110#0" expanded="true" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3302#3519#0" expanded="true" />
+            <element signature="e#3518#3519#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -505,17 +516,22 @@
     <entry file="file://$PROJECT_DIR$/src/views/ScriptBaseListView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="29" column="51" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="29" selection-end-column="51" />
+          <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initialize#0;class#ScriptBaseView#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/ScriptBaseView.java">
+    <entry file="file://$PROJECT_DIR$/src/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="288">
+          <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createScriptModelBase#0;class#MainForm#0" />
+          </folding>
         </state>
       </provider>
     </entry>

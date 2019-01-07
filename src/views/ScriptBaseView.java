@@ -61,10 +61,54 @@ public class ScriptBaseView extends JPanel {
         headerPanel.setBackground(new Color(0,0,0,0));
         headerPanel.setLayout(new BorderLayout());
 
-        // TOOLBAR
+
+        if (!StringUtils.isEmpty(smb.getTitle())){
+            JLabel labelTitle = new JLabel(smb.getTitle());
+            headerPanel.add(labelTitle, BorderLayout.NORTH);
+        }
+
+
+        if (!StringUtils.isEmpty(smb.getDescription())){	        // Add View
+            JLabel labelDescription = new JLabel(smb.getDescription());
+            headerPanel.add(labelDescription, BorderLayout.SOUTH);
+        }
+        topPanel.add(headerPanel, BorderLayout.WEST);
+
+        /* CONTENT */
+        topPanel.add(new JLabel(), BorderLayout.CENTER);
+
+        /* BUTTONS */
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setOpaque(true);
+        buttonsPanel.setBackground(new Color(0,0,0,0));
+        buttonsPanel.setLayout(new BorderLayout());
+
+        // Select File
+        JButton btnSelect = new JButton();
+        btnSelect.setText("Select File");
+        btnSelect.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                // TODO: falta implementar
+            }
+        });
+        buttonsPanel.add(btnSelect, BorderLayout.WEST);
+
+        // Run
+        JButton btnMessage = new JButton();
+        btnMessage.setText("Run");
+        btnMessage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                JOptionPane.showMessageDialog(buttonsPanel, "Hello World! :)" );
+            }
+        });
+        buttonsPanel.add(btnMessage, BorderLayout.EAST);
 
         // Add View
-        topPanel.add(headerPanel, BorderLayout.NORTH);
+        topPanel.add(buttonsPanel, BorderLayout.EAST);
     }
 
     private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {

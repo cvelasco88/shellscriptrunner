@@ -61,7 +61,6 @@ public class MainForm extends JFrame {
         headerPanel.setBackground(new Color(0,0,0,0));
         headerPanel.setLayout(new BorderLayout());
 
-
         // Add View
         topPanel.add(headerPanel, BorderLayout.NORTH);
     }
@@ -76,7 +75,6 @@ public class MainForm extends JFrame {
     private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
         // TextArea
         JLabel labelBottom = new JLabel();
-        labelBottom.setText("Steps number: " + smb.getSteps().size());
 
         ///
 
