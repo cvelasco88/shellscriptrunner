@@ -9,7 +9,7 @@ public class ContextColors {
     public static String COLOR_WHITE = "#ffffff";
     public static String COLOR_DARKWHITE = "#f4f4f4";
 
-    public static String COLOR_LIGHTGRAY = "#ffffff80";
+    public static String COLOR_LIGHTGRAY = "#fafafa";
     public static String COLOR_GRAY = "#464646";
     public static String COLOR_DARKGRAY = "#303030";
 

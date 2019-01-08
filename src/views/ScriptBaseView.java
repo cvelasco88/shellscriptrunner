@@ -2,9 +2,7 @@ package views;
 
 import helpers.ContextColors;
 import helpers.ContextCompat;
-import models.MyCellRenderer;
 import models.ScriptBase;
-import models.ScriptStep;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
@@ -31,6 +29,7 @@ public class ScriptBaseView extends JPanel {
         JPanel bottomPanel = new JPanel();
 
         topPanel.setLayout(new BorderLayout());
+
         middlePanel.setLayout(new BorderLayout());
         bottomPanel.setLayout(new BorderLayout());
 
@@ -112,7 +111,7 @@ public class ScriptBaseView extends JPanel {
     }
 
     private void initializeMiddlePanel(JPanel middlePanel, ScriptBase smb) {
-        ScriptBaseListView sbv = new ScriptBaseListView(middlePanel, smb);
+        ScriptBaseStepView sbv = new ScriptBaseStepView(middlePanel, smb);
 
         // Add View
         middlePanel.add(sbv, BorderLayout.CENTER);

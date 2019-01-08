@@ -2,6 +2,7 @@ import models.ScriptBase;
 import models.ScriptCommand;
 import models.ScriptInstruction;
 import models.ScriptStep;
+import terminal.JTerminal;
 import views.ScriptBaseView;
 
 import javax.swing.*;
@@ -74,11 +75,18 @@ public class MainForm extends JFrame {
 
     private void initializeBottomPanel(JPanel bottomPanel, ScriptBase smb) {
         // TextArea
-        JLabel labelBottom = new JLabel();
+        /*JPanel promtPanel = new JPanel();
+        promtPanel.setOpaque(true);
+        promtPanel.setBackground(new Color(0,0,0,0));
+        promtPanel.setBackground(Color.RED);
+        promtPanel.setLayout(new BorderLayout());
+
+        JTerminal terminal = new JTerminal();
+
 
         ///
 
-        /*JTextArea chatArea = new JTextArea(8, 40);
+        JTextArea chatArea = new JTextArea(8, 40);
         chatArea.setEditable(false);
         chatArea.setFocusable(false);
         JScrollPane chatScroll = new JScrollPane(chatArea);
@@ -96,31 +104,19 @@ public class MainForm extends JFrame {
         JPanel youLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         youLabelPanel.add(new JLabel("You:"));
 
-        JPanel mainPanel = rootPanel;
-
-
-        add(mainPanel);
-
-        //rootPanel.add(mainPanel);
-
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setPreferredSize(new Dimension(500, 500));
-
-        ScriptBase smb = createScriptModelBase();
-
-        ScriptBaseListView sbv = new ScriptBaseListView(smb);
-
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-        /*mainPanel.add(chatPanel);
+        mainPanel.add(chatPanel);
         mainPanel.add(Box.createVerticalStrut(10));
         mainPanel.add(youLabelPanel);
-        mainPanel.add(inputPanel);*/
+        mainPanel.add(inputPanel);
         //middlePanel.add(sbv);
 
-        ///
+        promtPanel.add(Box.createVerticalStrut(10));
+        promtPanel.add(youLabelPanel);
+        promtPanel.add(inputPanel);
+
 
         // Add View
-        bottomPanel.add(labelBottom);
+        bottomPanel.add(promtPanel);*/
     }
 
     /**
@@ -160,6 +156,8 @@ public class MainForm extends JFrame {
 
         for(int i=0;i<3;i++) {
             ScriptInstruction instruction = new ScriptInstruction();
+            instruction.setTitle("Basic commands");
+            instruction.setDescription("Basic commands below");
             ScriptCommand command1 = new ScriptCommand();
             command1.addString("ls");
             command1.addString("cd");

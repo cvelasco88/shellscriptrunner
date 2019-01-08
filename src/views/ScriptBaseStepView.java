@@ -1,7 +1,7 @@
 package views;
 
 import helpers.ContextCompat;
-import models.MyCellRenderer;
+import models.ScriptInstruction;
 import models.ScriptBase;
 import models.ScriptStep;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class ScriptBaseListView extends JPanel {
+public class ScriptBaseStepView extends JPanel {
 
 
     private int currentStep = 0;
@@ -18,7 +18,7 @@ public class ScriptBaseListView extends JPanel {
     private JPanel self = this;
 
     // ctor
-    public ScriptBaseListView(JPanel parentPanel, ScriptBase smb) {
+    public ScriptBaseStepView(JPanel parentPanel, ScriptBase smb) {
 
         this.parentPanel = parentPanel;
 
@@ -65,15 +65,15 @@ public class ScriptBaseListView extends JPanel {
             add(headerPanel, BorderLayout.NORTH);
 
             // LIST
+            DefaultListModel<ScriptInstruction> listModel = new DefaultListModel<>();
+            listModel.addAll(step.getInstructions());
 
-            // Create a JList that displays strings from an array
-            String[] data = {"one", "two", "three", "four"};
-            JList instructionList = new JList(data);
-
-            instructionList.setCellRenderer(new MyCellRenderer());
+            JList<ScriptInstruction> instructionList = new JList<>(listModel);
+            instructionList.setCellRenderer(new ScriptInstructionViewRenderer());
             instructionList.setOpaque(true);
             ContextCompat.decorateComponent(instructionList);
             // instructionList.setBackground(new Color(0,0,0,0));
+
 
             // JScrollPane scrollPane = new JScrollPane(myList);
 

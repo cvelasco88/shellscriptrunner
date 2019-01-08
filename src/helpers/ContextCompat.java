@@ -25,7 +25,7 @@ public class ContextCompat {
         this.theme = new ContextTheme();
         this.theme.setColorText(Color.decode(ContextColors.COLOR_TEXT));
         this.theme.setColorPanel(Color.decode(ContextColors.COLOR_WHITE));
-        this.theme.setColorList(Color.decode(ContextColors.COLOR_GRAY));
+        this.theme.setColorList(Color.decode(ContextColors.COLOR_LIGHTGRAY));
     }
 
     public static void decorateComponent(Component component){
